@@ -6,20 +6,20 @@ import Homepage from "./pages/homepage/Homepage";
 import ViewMessage from "./components/MessageComponents/ViewMessage";
 
 const App = () => {
-  return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/anonymous" element={<Homepage/>} />
-          <Route element={<ProtectedRoute />}>
-          <Route path='/message/:messageId' element={<ViewMessage/>}/>
-            <Route path="/homepage" element={<Homepage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+    return (
+        <div>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/anonymous" element={<Homepage />} />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path='/message/:messageId' element={<ViewMessage />} />
+                        <Route path="/homepage" element={<Homepage />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 };
 
 export default App;
