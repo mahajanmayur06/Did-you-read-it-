@@ -4,14 +4,15 @@ import cookieParser from "cookie-parser";
 import bodyParser from 'body-parser';
 dotenv.config()
 import path from "path";
-import { checkForPostExpiration } from './utils/SERVICE-WORKERS.js';
 import cors from 'cors'
+import cron from 'node-cron';
 import connectDB from './db/ConnectDB.js';
 import { app, server } from './socket/socket.js';
 import PostRoutes from './routes/PostRoutes.js';
 import MessageRoutes from './routes/MessageRoutes.js';
 import AuthRoutes from './routes/AuthRoutes.js';
 import CommentRoutes from './routes/CommentRoutes.js';
+import { checkForPostExpiration, checkForMessageExpiration } from './utils/SERVICE-WORKERS.js';
 // checkForPostExpiration();
 
 const PORT = process.env.PORT || 5000
@@ -30,6 +31,21 @@ app.use('/api/comments', CommentRoutes);
 //         res.sendFile(path.join(path.resolve(), "frontend/dist", "index.html"));
 //     });
 // }
+
+// Schedule the job to run every 1 minute
+cron.schedule("*/1 * * * *", () => {
+    console.log("Running post expiration check...");
+    checkForPostExpiration();
+});
+
+
+cron.schedule("0 0 * * *", () => {
+    console.log("Running message expiration check...");
+    checkForMessageExpiration();
+});
+
+console.log("Cron job for post expiration is running every 1 minute.");
+console.log("Cron job for message expiration is running every day.");
 
 server.listen(PORT, () => {
     console.log(`Connected to ${PORT}`);

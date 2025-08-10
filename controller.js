@@ -1,0 +1,8 @@
+PORT=5000
+MONGO_URI=mongodb+srv://mayur:mayur@cluster0.pxcsm3r.mongodb.net/OneSeen    
+VITE_CLIENT_ID=a4281e38c7634bd18a04b7b10f329f5d
+VITE_DOMAIN=https://mayurspit.kinde.com
+VITE_REDIRECT_URI=http://localhost:5173/homepage
+VITE_LOGOUT_URI=http://localhost:5173
+VITE_CLOUDINARY_CLOUD_NAME=
+VITE_CLOUDINARY_UPLOAD_PRESET=
